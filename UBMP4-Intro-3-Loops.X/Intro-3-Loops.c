@@ -1,6 +1,6 @@
 /*==============================================================================
  Project: Intro-3-Loops
- Date:    April 15, 2021
+ Date:    April 30, 2021
  
  This example program demonstrates the use of while and for loop structures to
  change the brightness of LEDs using PWM (Pulse-Width Modulated) signals.
@@ -19,7 +19,7 @@
 // TODO Set linker code offset to '1000' under "Additional options" pull-down.
 
 // Program variable definitions
-unsigned char tOnLED4 = 127;
+unsigned char TonLED4 = 127;
 unsigned char PWMperiod;
 unsigned int period = 460;
 
@@ -33,13 +33,13 @@ int main(void)
         // Decrease brightness
         if(SW2 == 0)
         {
-            tOnLED4 -= 1;
+            TonLED4 -= 1;
         }
 
         // Increase brightness
         if(SW3 == 0)
         {
-            tOnLED4 += 1;
+            TonLED4 += 1;
         }
         
         // PWM LED4 brightness
@@ -47,7 +47,7 @@ int main(void)
         while(PWMperiod != 0)
         {
             PWMperiod --;
-            if(tOnLED4 == PWMperiod)
+            if(TonLED4 == PWMperiod)
             {
                 LED4 = 1;
             }
@@ -101,7 +101,7 @@ int main(void)
         // PWM LED4 brightness
         for(unsigned char PWMperiod = 255; PWMperiod != 0; PWMperiod --)
         {
-            if(tOnLED4 == PWMperiod)
+            if(TonLED4 == PWMperiod)
             {
                 LED4 = 1;
             }
@@ -138,7 +138,7 @@ int main(void)
  *    inside the for loop will count down from 255 to 0, and should be 0 when
  *    the loop finishes. Is LED D5 lit? What must the value of PWMperiod be?
  * 
- * 7. Add this tone code below the PWM loop:
+ * 7. Add this code below the PWM loop to generate a tone:
                 
         // Change pitch
         if(SW4 == 0)
