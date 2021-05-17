@@ -1,6 +1,6 @@
 /*==============================================================================
  Project: Intro-3-Loops
- Date:    April 30, 2021
+ Date:    May 16, 2021
  
  This example program demonstrates the use of while and for loop structures to
  change the brightness of LEDs using PWM (Pulse-Width Modulated) signals.
@@ -15,13 +15,13 @@
 
 #include    "UBMP4.h"           // Include UBMP4 constants and functions
 
-// TODO Set linker ROM ranges to 'default,-0-FFF' under "Memory model" pull-down.
-// TODO Set linker code offset to '1000' under "Additional options" pull-down.
+// TODO Set linker ROM ranges to 'default,-0-7FF' under "Memory model" pull-down.
+// TODO Set linker code offset to '800' under "Additional options" pull-down.
 
 // Program variable definitions
-unsigned char TonLED4 = 127;
+unsigned char TonLED4 = 127;    // LED brightness PWM value
 unsigned char PWMperiod;
-unsigned int period = 460;
+unsigned int period = 460;      // Sound period value for later activities
 
 int main(void)
 {
@@ -158,15 +158,15 @@ int main(void)
             for(unsigned int p = period; p != 0; p--);
         }
 
- *    The section to make a tone contains nested for loops ? the outer loop 
+ *    The section to make a tone contains nested for loops. The outer loop 
  *    repeatedly causes the BEEPER pin to toggle before the inner loop runs.
  *    The inner loop is an empty loop, shown by the trailing semicolon ';'. It
  *    contains no code, so nothing will be repeated, but exists only to add a
- *    time delay to our program. The higher the number of loops, the longer it
- *    will take to decrement the loop counter variable to zero, increasing the
- *    time until the next cycle.
+ *    time delay to our program. The higher the number of loops, the more
+ *    instruction cycles it will take to decrement the loop counter variable
+ *    to zero, increasing the time delay until the next cycle.
  * 
- *    What variable type is period? How large a number can this be?
+ *    What variable type is period? How large a number can this variable hold?
  * 
  * 8. Why is period copied to the local variable p inside the inner for loop?
  *    What would happen if the period variable was counted down instead?
