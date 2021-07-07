@@ -20,7 +20,7 @@
 
 // Program variable definitions
 unsigned char TonLED4 = 127;    // LED brightness PWM value
-unsigned char PWMperiod;
+unsigned char PWMperiod;        // PWM period counter for PWM loops
 unsigned int period = 460;      // Sound period value for later activities
 
 int main(void)
@@ -46,19 +46,19 @@ int main(void)
         PWMperiod = 255;
         while(PWMperiod != 0)
         {
-            PWMperiod --;
             if(TonLED4 == PWMperiod)
             {
                 LED4 = 1;
             }
+            PWMperiod --;
             __delay_us(20);
         }
         LED4 = 0;
         
-        // Activate bootloader when SW1 is pressed.
+        // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
         {
-            asm("reset");
+            RESET();
         }
     }
 }
@@ -67,20 +67,19 @@ int main(void)
  * 
  * 1. The main part of the program contains the 'while(1)' loop. What condition
  *    is being evaluated within its brackets? (Hint: Think about the Boolean
- *    variables from Activity 2-Variables.) How many times does this loop run?
+ *    variables from Activity 2-Variables.) How many times will this loop run?
  * 
  * 2. There is a second 'while(PWMperiod != 0)' loop inside the first while
- *    loop. What condition is being evaluated inside the while statement's
- *    brackets? How many times will the contents of the loop run?
+ *    loop. What condition is being evaluated inside this while statement's
+ *    brackets? How many times will the contents of this inner loop run?
  * 
  * 3. What condition is being evaluated by the if statement inside the loop?
  *    What happens when the if condition is true?
  * 
  * 4. Pressing the up or down buttons (SW3 and SW2) will increase or decrease
  *    the brightness of LED D4 using PWM (Pulse-Width Modulation). How many 
- *    different brightnesses can the LED have? What is the step size of one
- *    brightness level change expressed as a percentage? Assuming a 5V power
- *    supply potential, how many volts would each step correspond to?
+ *    different brightnesses can the LED have? What would the step size of one
+ *    brightness level change be if it was expressed as a percentage?
  * 
  * 5. The while loop needs three statements to perform its function. First, the
  *    assignment statement 'PWMperiod = 255;' sets the PWMperiod variable. Next,
@@ -88,15 +87,15 @@ int main(void)
  *    while the condition is true. Unlike if statements, in which program flow
  *    continues below the contents of the if structure, the while loop causes
  *    the condition to be re-evaluated after executing the contents of its code.
- *    To ensure that the while loop does not execute forever, the assignment
- *    statement 'PWMperiod --;' modifies the variable inside the loop itself.
+ *    To ensure that the while loop does end at some point, the assignment
+ *    statement 'PWMperiod --;' modifies the variable from within the loop.
  *    When the condition is false, the loop terminates and the program continues
- *    running the code outside of the loop structure.
+ *    running the code below the loop structure.
  * 
  *    A 'for' loop is an alternative to a while loop, and incorporates the
  *    assignment of the loop variable, the loop conditional check, and variable
- *    modification in one 'for' statement as shown in the example code. Replace
- *    the while structure in the code above with the for structure, below:
+ *    modification into a single statement as shown in the example code. Replace
+ *    the entire while structure in the code with the following for structure:
         
         // PWM LED4 brightness
         for(unsigned char PWMperiod = 255; PWMperiod != 0; PWMperiod --)
@@ -160,7 +159,7 @@ int main(void)
 
  *    The section to make a tone contains nested for loops. The outer loop 
  *    repeatedly causes the BEEPER pin to toggle before the inner loop runs.
- *    The inner loop is an empty loop, shown by the trailing semicolon ';'. It
+ *    The inner loop is an empty loop, shown by its trailing semicolon ';'. It
  *    contains no code, so nothing will be repeated, but exists only to add a
  *    time delay to our program. The higher the number of loops, the more
  *    instruction cycles it will take to decrement the loop counter variable
@@ -169,7 +168,7 @@ int main(void)
  *    What variable type is period? How large a number can this variable hold?
  * 
  * 8. Why is period copied to the local variable p inside the inner for loop?
- *    What would happen if the period variable was counted down instead?
+ *    What would happen if the actual period variable was decremented instead?
  * 
  * Programming Activities
  * 
