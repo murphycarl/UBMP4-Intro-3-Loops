@@ -115,10 +115,11 @@ int main(void)
  * 
  *    This instance of the PWMperiod variable will be local to the for loop,
  *    and won't maintain its value outside of the loop, or alter the value of
- *    the existing PWMperiod variable. To prevent possible confusion, it is a
- *    bad idea to re-use variable names inside for loops. Let's prove that the
- *    program's global PWMperiod variable is not affected by the local variable
- *    in the for loop. Add this line above the for loop:
+ *    the existing PWMperiod variable. It's a bad idea to re-use variable names
+ *    inside loops since having two different versions of the same variable
+ *    creates confusion. Is this really the case? Let's prove that the global
+ *    PWMperiod variable is not affected by the local PWMperiod variable
+ *    inside the for loop. Add this line above the for loop:
  
         PWMperiod = 128;
 
@@ -136,6 +137,9 @@ int main(void)
  *    Compile and run the code. When the program runs, the PWMperiod variable
  *    inside the for loop will count down from 255 to 0, and should be 0 when
  *    the loop finishes. Is LED D5 lit? What must the value of PWMperiod be?
+ * 
+ *    Can you remove the global PWMperiod variable definition from the top of 
+ *    the program now that PWMperiod is being defined in the for loop?
  * 
  * 7. Add this code below the PWM loop to generate a tone:
                 
@@ -174,7 +178,7 @@ int main(void)
  * 
  * 1. Pressing and holding SW2 or SW3 causes the brightness of LED D4 to cycle
  *    through its entire brightness range. Modify the code so that pressing and
- *    holding SW2 will dim the LED until it is off and then keep if off, or
+ *    holding SW2 will dim the LED until it is off and then keep if off, and
  *    pressing and holding SW3 will brighten the LED and keep it at maximum
  *    brightness.
  * 
