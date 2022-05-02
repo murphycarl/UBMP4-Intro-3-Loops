@@ -29,7 +29,6 @@ int main(void)
     UBMP4_config();             // Configure on-board UBMP4 I/O devices
 	
     while(1)
-	
           
           
           
